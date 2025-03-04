@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Photo Merger</title>
     <style>
+      * {
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+      }
       body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -76,8 +80,6 @@
       }
       button:hover {
         background-color: #cc0000;
-      }
-      .preview-wrapper {
       }
     </style>
   </head>
@@ -154,7 +156,7 @@
         if (imgCount <= 4) imagesPerRow = 2;
         else if (imgCount <= 7) imagesPerRow = 3;
 
-        const imgWidth = 800;
+        const imgWidth = 600;
         const imgPadding = 20;
         const maxHeight = Math.max(
           ...[...imageContainer.children].map(
@@ -195,13 +197,13 @@
 
         mergedContainer.innerHTML = "";
         const mergedImg = document.createElement("img");
-        mergedImg.src = canvas.toDataURL("image/jpeg", 0.9); // 1.0 max quality
+        mergedImg.src = canvas.toDataURL("image/webp", 0.9); // 1.0 max quality
         mergedImg.draggable = true;
         mergedImg.addEventListener("contextmenu", (e) => {
           e.preventDefault();
           const a = document.createElement("a");
           a.href = mergedImg.src;
-          a.download = "merged-image.jpg";
+          a.download = "merged-image.webp";
           a.click();
         });
         mergedContainer.appendChild(mergedImg);
